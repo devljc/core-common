@@ -140,4 +140,4 @@ tasks.named('test') {
 ---
 ## 📄 License
 
-MIT License © 2025 leebak
+MIT License © 2025 devljc
