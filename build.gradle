@@ -1,0 +1,45 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version '3.4.5'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+version = '0.1.0'
+group = 'com.example'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+
+dependencies {
+    implementation 'org.springframework:spring-context' // 최소한의 Spring 기반 기능
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310' // Java 8 날짜용 (LocalDateTime 등)
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+
+tasks.named('jar').configure {
+    enabled = false
+}
+
+tasks.named('test').configure {
+    enabled = false
+}
