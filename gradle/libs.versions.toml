@@ -1,0 +1,15 @@
+[versions]
+grpc = "1.65.1"
+protobuf = "4.28.2"
+protobufPlugin = "0.9.4"
+
+[plugins]
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+
+[libraries]
+grpc-netty-shaded = { module = "io.grpc:grpc-netty-shaded", version.ref = "grpc" }
+grpc-stub         = { module = "io.grpc:grpc-stub", version.ref = "grpc" }
+grpc-protobuf     = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
+protobuf-java     = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+grpc-client-spring-boot-starter = { module = "net.devh:grpc-client-spring-boot-starter", version = "3.1.0.RELEASE" }
+grpc-server-spring-boot-starter = { module = "net.devh:grpc-server-spring-boot-starter", version = "3.1.0.RELEASE" }

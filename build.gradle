@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
     id 'org.springframework.boot' version '3.4.5'
     id 'io.spring.dependency-management' version '1.1.7'
+    alias(libs.plugins.protobuf)
 }
 
 version = '0.1.0'
@@ -19,27 +20,71 @@ java {
 
 
 dependencies {
-    implementation 'org.springframework:spring-context' // 최소한의 Spring 기반 기능
+    //Spring Core (빈 등록, 컨텍스트)
+    implementation 'org.springframework:spring-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
+    //JSON 직렬화/역직렬화 (LocalDateTime 등 포함)
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310' // Java 8 날짜용 (LocalDateTime 등)
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
+    //gRPC 통신 관련 의존성
+    implementation libs.grpc.netty.shaded     // Netty 기반 gRPC transport
+    implementation libs.grpc.stub             // gRPC 클라이언트/서버 Stub
+    implementation libs.grpc.protobuf         // gRPC용 Protobuf 지원
+    implementation libs.protobuf.java         // 일반 Protobuf Java 라이브러리
+
+    //JWKS(JSON Web Key Set) 제공
+    implementation 'com.nimbusds:nimbus-jose-jwt:10.3'
+
+    //Lombok (컴파일 타임 어노테이션)
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // 테스트 관련
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
+//gRPC 코드 자동 생성 설정
+protobuf {
+    protoc {
+        // Protobuf 컴파일러 버전 설정 (버전 카탈로그에서 참조)
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    plugins {
+        grpc {
+            // gRPC 코드 생성을 위한 protoc plugin
+            artifact = "io.grpc:protoc-gen-grpc-java:${libs.versions.grpc.get()}"
+        }
+    }
+    generateProtoTasks {
+        // 모든 proto 태스크에 grpc plugin 적용
+        all().forEach { task ->
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
+}
 
-tasks.named('jar').configure {
+//gRPC 자동 생성 파일 경로를 소스 디렉토리에 포함
+sourceSets {
+    main {
+        java {
+            srcDirs += "$buildDir/generated/source/proto/main/java"  // Protobuf Java 코드
+            srcDirs += "$buildDir/generated/source/proto/main/grpc"  // gRPC Stub 코드
+        }
+    }
+}
+
+//core 모듈은 실행 가능한 Jar 생성 X (라이브러리 전용)
+tasks.named('bootJar').configure {
     enabled = false
 }
 
 tasks.named('test').configure {
-    enabled = false
+    enabled = false // 테스트 비활성화 (필요 시 활성화)
 }

@@ -1,6 +1,5 @@
 package com.example.core.response;
 
-import com.example.core.exception.ErrorCode;
 import lombok.Getter;
 
 import java.nio.charset.StandardCharsets;
@@ -22,12 +21,8 @@ public class ApiResponse<T> {
         return new ApiResponse<>(true, data, null);
     }
 
-    public static <T> ApiResponse<T> error(ErrorCode code) {
-        return new ApiResponse<>(false, null, new ErrorResponse(code));
-    }
-
-    public static <T> ApiResponse<T> error(int status, String message) {
-        return new ApiResponse<>(false, null, new ErrorResponse(status, message));
+    public static <T> ApiResponse<T> error(ErrorResponse errorResponse) {
+        return new ApiResponse<>(false, null, errorResponse);
     }
 
     public static byte[] errorJsonBytes(int status, String message) {
