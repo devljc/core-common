@@ -1,6 +1,6 @@
 # 🧩 Core Module - 공통 유틸리티 모듈
 
-MSA 환경에서 공통적으로 사용하는 예외 처리, 응답 포맷, 직렬화 설정, 권한 검증, GRPC 설정을 제공하는 **경량화 공통 모듈**입니다.
+MSA 환경에서 공통적으로 사용하는 예외 처리, 응답 포맷, 직렬화 설정, 권한 검증 등을 제공하는 **경량화 공통 모듈**입니다.
 
 - **Spring Boot 3.4.5** 기반으로 설계되어 있으며, Spring MVC와 WebFlux에서 모두 사용 가능합니다.
 - **Jackson**을 사용하여 JSON 직렬화 및 역직렬화를 지원합니다.
@@ -60,10 +60,7 @@ core
 | JWT 서명 검증        | `nimbus-jose-jwt`                                                    | `10.3`          |
 | 애너테이션 처리         | `lombok`                                                             | `Spring BOM`    |
 | 테스트              | `junit-jupiter-api`, `junit-jupiter-engine`                          | `Spring BOM`    |
-```plaintext
-💡 버전 관리는 libs.versions.toml에서 중앙 관리되며,gradle/libs.versions.toml 파일에서 grpc, protobuf, protobufPlugin을 정의하고
-alias(libs.plugins.protobuf) 방식으로 plugin도 설정합니다.
-```
+
 ---
 ## ⚙️ 주요 기능 설명
 
