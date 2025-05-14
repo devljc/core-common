@@ -3,7 +3,6 @@
 MSA 환경에서 공통적으로 사용하는 예외 처리, 응답 포맷, 직렬화 설정, 권한 검증, GRPC 설정을 제공하는 **경량화 공통 모듈**입니다.
 
 - **Spring Boot 3.4.5** 기반으로 설계되어 있으며, Spring MVC와 WebFlux에서 모두 사용 가능합니다.
-- **gRPC**와 **Protobuf**를 지원하여 마이크로서비스 간의 통신을 원활하게 처리합니다.
 - **Jackson**을 사용하여 JSON 직렬화 및 역직렬화를 지원합니다.
 - **JWT**를 사용하여 인증 및 권한 검증을 수행합니다.
 - **CustomException**과 **ErrorCode**를 통해 일관된 예외 처리 및 에러 응답을 제공합니다.
@@ -48,8 +47,6 @@ core
     │   │       ├── response
     │   │       │   ├── ApiResponse.java
     │   │       │   └── ErrorResponse.java
-    │   │       └── proto
-    │   │           └── (gRPC 및 공통 메시지 정의)
 ```
 
 ---
@@ -61,9 +58,6 @@ core
 | Spring Core      | `spring-context`, `spring-boot-autoconfigure`                        | `3.4.5`         |
 | JSON 직렬화         | `jackson-databind`, `jackson-datatype-jsr310`                        | `Spring BOM`    |
 | JWT 서명 검증        | `nimbus-jose-jwt`                                                    | `10.3`          |
-| gRPC 통신          | `grpc-netty-shaded`, `grpc-stub`, `grpc-protobuf`                    | `1.65.1`        |
-| Protobuf 지원      | `protobuf-java`                                                      | `4.28.2`        |
-| gRPC Spring Boot | `grpc-client-spring-boot-starter`, `grpc-server-spring-boot-starter` | `3.1.0.RELEASE` |
 | 애너테이션 처리         | `lombok`                                                             | `Spring BOM`    |
 | 테스트              | `junit-jupiter-api`, `junit-jupiter-engine`                          | `Spring BOM`    |
 ```plaintext
