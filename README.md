@@ -34,7 +34,7 @@ core
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.example.core
+    │   │   └── com.example.common
     │   │       ├── auth
     │   │       │   ├── JwtValidator.java
     │   │       │   └── RoleVerifier.java

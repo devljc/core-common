@@ -1,7 +1,7 @@
-package com.example.core.auth;
+package com.example.common.auth;
 
-import com.example.core.exception.CustomException;
-import com.example.core.exception.ErrorCode;
+import com.example.common.exception.CustomException;
+import com.example.common.exception.ErrorCode;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;

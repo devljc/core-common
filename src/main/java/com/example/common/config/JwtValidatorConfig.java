@@ -1,4 +1,4 @@
-package com.example.core.config;
+package com.example.common.config;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.source.JWKSource;

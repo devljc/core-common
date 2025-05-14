@@ -1,6 +1,6 @@
-package com.example.core.response;
+package com.example.common.response;
 
-import com.example.core.exception.ErrorCode;
+import com.example.common.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter

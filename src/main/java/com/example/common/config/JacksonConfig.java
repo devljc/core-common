@@ -1,4 +1,4 @@
-package com.example.core.config;
+package com.example.common.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
