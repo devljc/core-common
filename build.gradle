@@ -7,16 +7,21 @@ plugins {
 version = '0.1.0'
 group = 'com.example'
 
-repositories {
-    mavenCentral()
-}
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 dependencies {
     //Spring Core (빈 등록, 컨텍스트)
@@ -37,8 +42,6 @@ dependencies {
     // 테스트 관련
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 //core 모듈은 실행 가능한 Jar 생성 X (라이브러리 전용)
